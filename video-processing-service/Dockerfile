@@ -1,22 +1,24 @@
-FROM node:18 as builder
+FROM node:18.17 as builder
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
 
-RUN npm i
+RUN npm install
 
 COPY . .
 
 RUN npm run build
 
-FROM node:18
+FROM node:18.17
 
 RUN apt-get update && apt-get install -y ffmpeg
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
+
+RUN npm install --only=production
 
 COPY --from=builder /app/dist ./dist
 
