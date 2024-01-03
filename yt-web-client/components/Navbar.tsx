@@ -7,6 +7,7 @@ import { onAuthStateChangedHelper } from "@/firebase/firebase";
 import { useEffect, useState } from "react";
 import { User } from "firebase/auth";
 import { unsubscribe } from "diagnostics_channel";
+import UploadBtn from "./UploadBtn";
 
 export default function Navbar() {
   // init user state
@@ -26,6 +27,7 @@ export default function Navbar() {
       <Link href="/" className="p-[1em]">
         <Image src="/youtube-logo.svg" alt="haha" width={90} height={20} />
       </Link>
+      {user && <UploadBtn />}
       <SignInBtn user={user} />
     </nav>
   );
